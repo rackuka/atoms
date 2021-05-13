@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Input, Slider, SliderProps, Text } from 'react-native-elements'
 
 interface SliderInputProps {
+  thumbSize?: number
 }
 
 export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => {
@@ -27,7 +28,8 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
       <Slider
         step={props.step}
         style={styles.slider || props.style || props.containerStyle}
-        thumbStyle={props.thumbStyle}
+        thumbStyle={props.thumbStyle || { ...props.thumbSize && { width: props.thumbSize, height: props.thumbSize}}}
+        thumbTintColor={props.thumbTintColor}
         value={value}
         minimumValue={minValue}
         maximumValue={maxValue}
@@ -35,6 +37,9 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
       />
       <Input keyboardType='numeric' value={`${value}`} 
              containerStyle={styles.input}
+             inputStyle={{}}
+             textAlign={'center'}
+             inputContainerStyle={{borderWidth: 1}}
              onChangeText={
                (val:string) => {
                   let iVal = Number.parseInt(val);

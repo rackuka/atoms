@@ -12,11 +12,22 @@ export default function App() {
       <View style={styles.container}>
         <Text>Open up App.tsx to start working on your app!</Text>
         <StatusBar style="auto" />
+        <Slider
+            value={sliderInputVal} 
+            step={5} 
+            minimumValue={1} 
+            maximumValue={40} 
+            thumbStyle={{width: 10, height: 10}}
+            onValueChange={(val) => {setSliderInputVal(val)}} 
+        />
         <SliderInput 
             value={sliderInputVal} 
             step={5} 
             minimumValue={1} 
             maximumValue={40} 
+            thumbTintColor={'green'}
+            thumbSize={15}
+            // thumbStyle={{width: 10, height: 10}}
             onValueChange={(val) => {setSliderInputVal(val)}} 
             style={{
               borderColor: 'green',
