@@ -2,7 +2,8 @@
   "name": "rackuka-atoms",
   "version": "0.0.1",
   "description": "Alexei Snisarenko Atoms",
-  "main": "node_modules/expo/AppEntry.js",
+  "//main": "node_modules/expo/AppEntry.js",
+  "main": "rne/index.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
