@@ -14,17 +14,17 @@ export default function App() {
         <StatusBar style="auto" />
         <Slider
             value={sliderInputVal} 
-            step={5} 
-            minimumValue={1} 
-            maximumValue={40} 
+            step={10000} 
+            minimumValue={50000} 
+            maximumValue={150000} 
             thumbStyle={{width: 10, height: 10}}
             onValueChange={(val) => {setSliderInputVal(val)}} 
         />
         <SliderInput 
             value={sliderInputVal} 
-            step={5} 
-            minimumValue={1} 
-            maximumValue={40} 
+            step={10000} 
+            minimumValue={50000} 
+            maximumValue={150000} 
             thumbTintColor={'green'}
             thumbSize={15}
             // thumbStyle={{width: 10, height: 10}}
