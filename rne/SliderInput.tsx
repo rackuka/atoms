@@ -11,17 +11,34 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
   const maxValue: number = props.maximumValue ?? 1;
 
   function onValueChange(val: number) {
-  setValue(val)
     if (props.onValueChange !== undefined) {
       props.onValueChange(val)
     }
   }
 
   const [value, setValue] = useState<number>(props.value === undefined ? minValue : props.value < minValue ? minValue : props.value > maxValue ? maxValue : props.value)
+  const [sValue, setSValue] = useState<string>(`${value}`)
 
   useEffect(() => {
     setValue(props.value ?? minValue)
   }, [props.value])
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      let iVal = Number.parseInt(sValue);
+      if (Number.isNaN(iVal) || iVal < minValue || iVal > maxValue) {
+        setSValue(`${value}`)
+      }
+    }, 3000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [sValue])
+
+  function f(e: any) {
+    console.log(e);
+  }
 
   return (
     <View style={styles.container}>
@@ -33,18 +50,27 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
         value={value}
         minimumValue={minValue}
         maximumValue={maxValue}
-        onValueChange={(val) => {onValueChange(val)}}
+        onValueChange={(val) => {
+          setValue(val)
+          setSValue(`${val}`)
+          onValueChange(val)
+        }}
       />
-      <Input keyboardType='numeric' value={`${value}`} 
+      <Input keyboardType='numeric' value={sValue} 
              containerStyle={styles.input}
              inputStyle={{}}
              textAlign={'center'}
              inputContainerStyle={{borderWidth: 1}}
-             onChangeText={
+            onChangeText={
                (val:string) => {
                   let iVal = Number.parseInt(val);
-                  let vVal = Number.isNaN(iVal) ? minValue : iVal < minValue ? minValue : iVal > maxValue ? maxValue : iVal;
-                  onValueChange(vVal);
+                  if (Number.isNaN(iVal)) {
+                    setSValue(val === '' ? val : sValue)
+                  }
+                  else {
+                    setSValue(val);
+                    setValue(iVal < minValue ? minValue : iVal > maxValue ? maxValue : iVal);
+                  }
                 }
       }/>
     </View>
