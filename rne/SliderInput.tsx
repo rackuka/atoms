@@ -21,6 +21,7 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
 
   useEffect(() => {
     setValue(props.value ?? minValue)
+    setSValue(`${props.value ?? minValue}`)
   }, [props.value])
 
   useEffect(() => {
