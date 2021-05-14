@@ -36,10 +36,6 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
     }
   }, [sValue])
 
-  function f(e: any) {
-    console.log(e);
-  }
-
   return (
     <View style={styles.container}>
       <Slider
@@ -61,7 +57,7 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
              inputStyle={{}}
              textAlign={'center'}
              inputContainerStyle={{borderWidth: 1}}
-            onChangeText={
+             onChangeText={
                (val:string) => {
                   let iVal = Number.parseInt(val);
                   if (Number.isNaN(iVal)) {
@@ -69,7 +65,9 @@ export const SliderInput: React.FC<SliderInputProps & SliderProps> = (props) => 
                   }
                   else {
                     setSValue(val);
-                    setValue(iVal < minValue ? minValue : iVal > maxValue ? maxValue : iVal);
+                    let vVal = iVal < minValue ? minValue : iVal > maxValue ? maxValue : iVal;
+                    setValue(vVal);
+                    onValueChange(vVal)
                   }
                 }
       }/>
